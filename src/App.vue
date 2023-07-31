@@ -9,8 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import "./App.less";
-import bigImg from "./assets/imgs/22kb.png";
-import smallImg from "./assets/imgs/5kb.png";
+import "@/App.less";
+import bigImg from "@/assets/imgs/22kb.png";
+import smallImg from "@/assets/imgs/5kb.png";
 </script>
 <style scoped></style>

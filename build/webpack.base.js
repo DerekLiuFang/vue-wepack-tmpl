@@ -20,15 +20,20 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        use: "vue-loader",
+        use: ["thread-loader", "vue-loader"],
+        include: [path.resolve(__dirname, "../src")], // 只对项目src文件的vue进行loader解析,
       },
       {
         test: /\.(js|ts)$/,
-        use: ["babel-loader"],
-        exclude: /node_modules/,
+        use: ["thread-loader", "babel-loader"],
+        include: [path.resolve(__dirname, "../src")], // 只对项目src文件的ts进行loader解析
       },
       {
-        test: /\.(css|less)$/,
+        test: /\.css$/, //匹配所有的 css 文件
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+      {
+        test: /\.less$/, //匹配所有的 less 文件
         use: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
       },
       {
@@ -85,6 +90,15 @@ module.exports = {
   resolve: {
     // 当引入模块未带后缀时，依次添加配置后缀查找
     extensions: [".vue", ".ts", ".js", ".json"],
+    alias: {
+      "@": path.join(__dirname, "../src"),
+    },
+    // 查找第三方模块只在本项目的node_modules中查找.如果用的是pnpm 就暂时不要配置这个，会有幽灵依赖的问题，访问不到很多模块。
+    // modules: [path.resolve(__dirname, "../node_modules")],
+  },
+  // 开启持久化换成，提升构建效率
+  cache: {
+    type: "filesystem", // 使用文件缓存
   },
   optimization: {},
 };

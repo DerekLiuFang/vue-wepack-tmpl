@@ -55,9 +55,15 @@ devDependencies:
   serve:
     specifier: ^14.2.0
     version: 14.2.0
+  speed-measure-webpack-plugin:
+    specifier: ^1.5.0
+    version: 1.5.0(webpack@5.88.2)
   style-loader:
     specifier: ^3.3.3
     version: 3.3.3(webpack@5.88.2)
+  thread-loader:
+    specifier: ^4.0.2
+    version: 4.0.2(webpack@5.88.2)
   vue-loader:
     specifier: ^17.2.2
     version: 17.2.2(vue@3.3.4)(webpack@5.88.2)
@@ -3233,6 +3239,10 @@ packages:
     hasBin: true
     dev: true
 
+  /json-parse-better-errors@1.0.2:
+    resolution: {integrity: sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==}
+    dev: true
+
   /json-parse-even-better-errors@2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
     dev: true
@@ -4295,6 +4305,16 @@ packages:
       - supports-color
     dev: true
 
+  /speed-measure-webpack-plugin@1.5.0(webpack@5.88.2):
+    resolution: {integrity: sha512-Re0wX5CtM6gW7bZA64ONOfEPEhwbiSF/vz6e2GvadjuaPrQcHTQdRGsD8+BE7iUOysXH8tIenkPCQBEcspXsNg==}
+    engines: {node: '>=6.0.0'}
+    peerDependencies:
+      webpack: ^1 || ^2 || ^3 || ^4 || ^5
+    dependencies:
+      chalk: 4.1.2
+      webpack: 5.88.2(webpack-cli@5.1.4)
+    dev: true
+
   /statuses@1.5.0:
     resolution: {integrity: sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==}
     engines: {node: '>= 0.6'}
@@ -4432,6 +4452,19 @@ packages:
       acorn: 8.10.0
       commander: 2.20.3
       source-map-support: 0.5.21
+    dev: true
+
+  /thread-loader@4.0.2(webpack@5.88.2):
+    resolution: {integrity: sha512-UOk/KBydsQjh4Ja5kocxDUzhv11KYptHN/h8gdSwo6/MBkYrWqQua6K2qwlpXnCXS9c/uLs8F/JF8rpveF0+fA==}
+    engines: {node: '>= 16.10.0'}
+    peerDependencies:
+      webpack: ^5.0.0
+    dependencies:
+      json-parse-better-errors: 1.0.2
+      loader-runner: 4.3.0
+      neo-async: 2.6.2
+      schema-utils: 4.2.0
+      webpack: 5.88.2(webpack-cli@5.1.4)
     dev: true
 
   /thunky@1.1.0:
