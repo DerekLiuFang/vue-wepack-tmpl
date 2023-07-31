@@ -2,6 +2,9 @@ const path = require("node:path");
 const { VueLoaderPlugin } = require("vue-loader");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const isDev = process.env.NODE_ENV === "development";
 
 /**
  * @type {import('webpack').Configuration}
@@ -11,7 +14,7 @@ module.exports = {
   entry: path.join(__dirname, "../src/index.ts"),
 
   output: {
-    filename: "static/js/[name].js",
+    filename: "static/js/[name].[chunkhash:8].js",
     path: path.join(__dirname, "../dist"),
     publicPath: "/",
     clean: true,
@@ -30,11 +33,20 @@ module.exports = {
       },
       {
         test: /\.css$/, //匹配所有的 css 文件
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [
+          isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+        ],
       },
       {
         test: /\.less$/, //匹配所有的 less 文件
-        use: ["style-loader", "css-loader", "postcss-loader", "less-loader"],
+        use: [
+          isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "less-loader",
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/, // 匹配图片文件
@@ -45,7 +57,7 @@ module.exports = {
           },
         },
         generator: {
-          filename: "static/images/[name][ext]", // 文件输出目录和命名
+          filename: "static/images/[name].[contenthash:8][ext]", // 文件输出目录和命名
         },
       },
       {
@@ -57,7 +69,7 @@ module.exports = {
           },
         },
         generator: {
-          filename: "static/fonts/[name][ext]", // 文件输出目录和命名
+          filename: "static/fonts/[name].[contenthash:8][ext]", // 文件输出目录和命名
         },
       },
 
@@ -70,7 +82,7 @@ module.exports = {
           },
         },
         generator: {
-          filename: "static/media/[name][ext]", // 文件输出目录和命名
+          filename: "static/media/[name].[contenthash:8][ext]", // 文件输出目录和命名
         },
       },
     ],
@@ -81,6 +93,7 @@ module.exports = {
       template: path.resolve(__dirname, "../public/index.html"),
       inject: true,
     }),
+
     new Webpack.DefinePlugin({
       "process.env.BASE_ENV": JSON.stringify(process.env.BASE_ENV),
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
